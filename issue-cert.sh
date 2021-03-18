@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 HOST=$1
 echo Generating key and certificate for $HOST
 openssl ecparam -genkey -name prime256v1 -noout -out $HOST.key

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-HOST=$1
-echo Generating key and certificate for $HOST
+NETWORK=$1
+HOST=$2
+echo Generating key and certificate for $HOST to join $NETWORK
 openssl ecparam -genkey -name prime256v1 -noout -out $HOST.key
 openssl req -new -key $HOST.key -out $HOST.csr -subj "/CN=${HOST}"
 
@@ -14,7 +15,7 @@ extendedKeyUsage = serverAuth, clientAuth
 subjectAltName = DNS:${HOST}
 "
 cat <<< "$local_openssl_config" > node.ext
-openssl x509 -req -in $HOST.csr -CA ca/ca.pem -CAkey ca/ca.key -CAcreateserial -out $HOST.pem -days 365 -sha256 \
+openssl x509 -req -in $HOST.csr -CA $NETWORK/ca.pem -CAkey $NETWORK/ca.key -CAcreateserial -out $HOST.pem -days 365 -sha256 \
   -extfile node.ext \
   -extensions alt_names
 

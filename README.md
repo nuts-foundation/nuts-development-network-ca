@@ -10,8 +10,6 @@ Replace `[network]` with `development` or `stable` to generate a certificate for
 
 It writes the private key and certificate in the `issued-certificates` directory.
 
-Note: to generate a wildcard certificate, put the host name in double quotes.
-
 # Issue certificate without Docker
 
 If you don't want to use Docker you can use the OpenSSL script directly:
@@ -29,3 +27,7 @@ my.nuts.host.nl-development.key
 my.nuts.host.nl-development.pem
 truststore-development.pem
 ```
+
+# Wildcard certificates
+
+It is possible to issue a wildcard certificate, but don't forget to put the hostname in double quotes.

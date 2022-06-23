@@ -16,3 +16,8 @@
 
 # MacOS
 .DS_Store
+
+# Generator output
+/*.pem
+/*.key
+*.srl

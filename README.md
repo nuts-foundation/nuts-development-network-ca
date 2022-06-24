@@ -6,4 +6,10 @@ To issue a Nuts development network certificate use the `issuer-cert.sh` script,
 
 Replace `[network]` with `development` or `stable` to generate a certificate for one of those networks.
 
-It writes the private key and certificate in the current directory.
+It writes the private key, certificate and the truststore in the current directory.
+
+```
+my.nuts.host.nl-development.key
+my.nuts.host.nl-development.pem
+truststore-development.pem
+```

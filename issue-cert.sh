@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-export NETWORK=$1
-export HOST=$2
+NETWORK=$1
+HOST=$2
 echo Generating key and certificate for $HOST to join $NETWORK
 openssl ecparam -genkey -name prime256v1 -noout -out $HOST-$NETWORK.key
 openssl req -new -key $HOST-$NETWORK.key -out $HOST-$NETWORK.csr -subj "/CN=${HOST}"

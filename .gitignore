@@ -21,3 +21,4 @@
 /*.pem
 /*.key
 *.srl
+*.crl

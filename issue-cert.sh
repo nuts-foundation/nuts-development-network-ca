@@ -21,5 +21,11 @@ openssl x509 -req -in $HOST-$NETWORK.csr -CA $NETWORK/ca.pem -CAkey $NETWORK/ca.
 
 cp $NETWORK/ca.pem truststore-$NETWORK.pem
 
+# Generate CRL, required for some setups
+# See https://github.com/nuts-foundation/nuts-development-network-ca/issues/4
+touch certs-database.tmp
+openssl ca -gencrl -config openssl.conf -keyfile $NETWORK/ca.key -cert $NETWORK/ca.pem -out nuts-root-ca-$NETWORK.crl
+rm certs-database.tmp
+
 rm $HOST-$NETWORK.csr
 rm node.ext

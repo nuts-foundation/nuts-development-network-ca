@@ -3,7 +3,16 @@ NETWORK=$1
 HOST=$2
 echo Generating key and certificate for $HOST to join $NETWORK
 openssl ecparam -genkey -name prime256v1 -noout -out $HOST-$NETWORK.key
-openssl req -new -key $HOST-$NETWORK.key -out $HOST-$NETWORK.csr -subj "/CN=${HOST}"
+
+if [[ $OSTYPE == msys ]]; then
+  echo Detected GitBash/Cygwin on Windows
+  # GitBash/Cygwin on Windows requires escaping the starting slash of the the subject DNS
+  # Otherwise it gets expanded into a filesystem path.
+  DN_PREFIX="//"
+else
+  DN_PREFIX="/"
+fi
+openssl req -new -key $HOST-$NETWORK.key -out $HOST-$NETWORK.csr -subj "${DN_PREFIX}CN=${HOST}"
 
 local_openssl_config="
 authorityKeyIdentifier=keyid,issuer

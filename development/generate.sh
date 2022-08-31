@@ -1,5 +1,5 @@
 if [[ $OSTYPE == msys ]]; then
-  echo cSript does not work on GitBash/Cygwin!
+  echo Script does not work on GitBash/Cygwin!
   exit 1
 fi
 

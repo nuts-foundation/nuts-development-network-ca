@@ -16,6 +16,7 @@ openssl req -new -key $HOST-$NETWORK.key -out $HOST-$NETWORK.csr -subj "${DN_PRE
 
 local_openssl_config="
 extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = DNS:${HOST}
 
 [alt_names]
 subjectAltName = DNS:${HOST}

@@ -15,9 +15,6 @@ fi
 openssl req -new -key $HOST-$NETWORK.key -out $HOST-$NETWORK.csr -subj "${DN_PREFIX}CN=${HOST}"
 
 local_openssl_config="
-authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
-keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 extendedKeyUsage = serverAuth, clientAuth
 
 [alt_names]
@@ -25,8 +22,7 @@ subjectAltName = DNS:${HOST}
 "
 cat <<< "$local_openssl_config" > node.ext
 openssl x509 -req -in $HOST-$NETWORK.csr -CA $NETWORK/ca.pem -CAkey $NETWORK/ca.key -CAcreateserial -out $HOST-$NETWORK.pem -days 365 -sha256 \
-  -extfile node.ext \
-  -extensions alt_names
+  -extfile node.ext
 
 cp $NETWORK/ca.pem truststore-$NETWORK.pem
 

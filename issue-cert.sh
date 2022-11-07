@@ -16,7 +16,7 @@ openssl req -new -key $HOST-$NETWORK.key -out $HOST-$NETWORK.csr -subj "${DN_PRE
 
 local_openssl_config="
 extendedKeyUsage = serverAuth, clientAuth
-subjectAltName = DNS:${HOST}
+subjectAltName = $( shift ; set -- "${@/#/DNS:}" ; echo "$*" | sed "s/ /, /g" )
 "
 cat <<< "$local_openssl_config" > node.ext
 openssl x509 -req -in $HOST-$NETWORK.csr -CA $NETWORK/ca.pem -CAkey $NETWORK/ca.key -CAcreateserial -out $HOST-$NETWORK.pem -days 365 -sha256 \

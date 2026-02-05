@@ -15,4 +15,4 @@ basicConstraints=CA:TRUE,pathlen:0
 
 echo Generating development network root CA
 openssl ecparam -genkey -name prime256v1 -noout -out ca.key
-openssl req -config <(echo "$CONFIG") -extensions ext -x509 -new -nodes -key ca.key -sha256 -days 1825 -out ca.pem -subj "/CN=Nuts Development Network Root CA"
+openssl req -config <(echo "$CONFIG") -extensions ext -x509 -new -nodes -key ca.key -sha256 -days 1825 -out ca.pem -subj "/CN=Nuts Development Network Root CA G2"
